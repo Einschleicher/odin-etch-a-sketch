@@ -5,6 +5,7 @@ const btn = document.querySelector("button");
 for (let i = 0; i < 16 * 16; i++) {
     const square = document.createElement("div");
     square.classList.add("square");
+    square.setAttribute("counter", 0);
     container.appendChild(square);
 }
 
@@ -13,7 +14,14 @@ let squares = document.querySelectorAll(".square");
 
 squares.forEach(square => {
     square.addEventListener("mouseover", function(e) {
-        square.style.backgroundColor = getRandomRGB();
+        let counter = parseInt(square.getAttribute("counter")) + 1;
+        if (square.getAttribute("counter") === "0") {
+            square.style.backgroundColor = getRandomRGB();
+        }
+        else if (square.getAttribute("counter") >= 10) {
+            square.style.backgroundColor = "rgb(0, 0, 0)"
+        }
+        square.setAttribute("counter", counter)
     })
 })
 
